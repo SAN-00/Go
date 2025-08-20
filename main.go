@@ -5,6 +5,69 @@ import (
 	"myproject/simplecalc"
 )
 
+type Student struct {
+	Name  string
+	Marks int
+}
+
+func (s *Student) ShowResult() string {
+	if s.Marks >= 40 {
+		return s.Name + " has Passed"
+	}
+	return s.Name + " has Failed"
+}
+
+// --- Pointer function ---
+func IncreaseMarks(marks *int) {
+	*marks = *marks + 10
+}
+
+func main() {
+	// --- Maps ---
+	subjects := map[string]int{
+		"Maths":   75,
+		"Science": 60,
+		"English": 50,
+	}
+
+	fmt.Println("Subjects:", subjects)
+
+	// Adding new subject
+	subjects["History"] = 80
+	fmt.Println("After adding History:", subjects)
+
+	// Updating marks
+	subjects["Maths"] = 85
+	fmt.Println("After updating Maths:", subjects)
+
+	// Checking for a subject
+	if val, ok := subjects["Science"]; ok {
+		fmt.Println("Science marks found:", val)
+	} else {
+		fmt.Println("Science not found")
+	}
+
+	fmt.Println("All Subjects and Marks:")
+	for sub, mark := range subjects {
+		fmt.Println(sub, ":", mark)
+	}
+
+	// --- Pointer function ---
+	score := 35
+	fmt.Println("\nBefore increase:", score)
+	IncreaseMarks(&score)
+	fmt.Println("After increase:", score)
+
+	// --- Method ---
+	stu1 := Student{Name: "Sammy", Marks: 55}
+	stu2 := Student{Name: "Abby", Marks: 30}
+
+	fmt.Println(stu1.Name, "Result:", stu1.ShowResult())
+	fmt.Println(stu2.Name, "Result:", stu2.ShowResult())
+	mainMovie()
+}
+
+// --- Assgn 2 ---
 // --- Structures ---
 type Movie struct {
 	Title string
@@ -12,7 +75,7 @@ type Movie struct {
 	Year  int
 }
 
-func main() {
+func mainMovie() {
 	favMovie := Movie{
 		Title: "Baahubali",
 		Hero:  "Prabhas",
@@ -53,6 +116,8 @@ func main() {
 
 	fmt.Println("Length of slice2:", len(slice2))
 	fmt.Println("Capacity of slice2:", cap(slice2))
+
+	// --- Assgn1 ---
 
 	fmt.Println("Hello, Sai")
 
