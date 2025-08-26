@@ -46,7 +46,7 @@ func HelloGreetings() {
 	go greet("Tamil", "Vanakkam!", &wg)
 	go greet("Telugu", "Namaskaram!", &wg)
 
-	fmt.Scanln()
+	wg.Wait()
 }
 
 // --- Factorial Program ---
