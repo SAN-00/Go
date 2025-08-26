@@ -3,7 +3,70 @@ package main
 import (
 	"fmt"
 	"myproject/simplecalc"
+	"strings"
+	"sync"
 )
+
+// --- Palindrome Function ---
+func Palindrome(word string) {
+	length := len(word)
+	for i := 0; i < length/2; i++ {
+		if word[i] != word[length-1-i] {
+			fmt.Println(word, "is NOT a palindrome")
+			return
+		}
+	}
+	fmt.Println(word, "is a palindrome")
+}
+
+// --- Fibonacci Sequence ---
+func Fibonacci(limit int) {
+	a, b := 0, 1
+	fmt.Println("Fibonacci Sequence:")
+	for a <= limit {
+		fmt.Print(a, " ")
+		a, b = b, a+b
+	}
+	fmt.Println()
+}
+
+// --- HelloGreetings in Different Languages ---
+func greet(lang, msg string, wg *sync.WaitGroup) {
+	defer wg.Done()
+	fmt.Printf("%s: %s\n", lang, msg)
+}
+
+func HelloGreetings() {
+	fmt.Println("\nGreetings in different languages:")
+	var wg sync.WaitGroup
+	wg.Add(5)
+	go greet("English", "Hello!", &wg)
+	go greet("Spanish", "Hola!", &wg)
+	go greet("French", "Bonjour!", &wg)
+	go greet("Tamil", "Vanakkam!", &wg)
+	go greet("Telugu", "Namaskaram!", &wg)
+
+	fmt.Scanln()
+}
+
+// --- Factorial Program ---
+
+func Factorial(n int) int {
+	if n == 0 {
+		return 1
+	}
+	return n * Factorial(n-1)
+}
+
+// --- Counting Words in a Sentence ---
+func wordCounter(sentence string) {
+	words := strings.Split(sentence, " ")
+
+	fmt.Println("\nWords and their lengths:")
+	for _, word := range words {
+		fmt.Printf("%s %d\n", word, len(word))
+	}
+}
 
 type Student struct {
 	Name  string
@@ -23,12 +86,29 @@ func IncreaseMarks(marks *int) {
 }
 
 func main() {
+	fmt.Println("Palindrome Check:")
+	Palindrome("level")
+	Palindrome("sai")
+
+	fmt.Println("\nFibonacci till 30:")
+	Fibonacci(30)
+
+	HelloGreetings()
+
+	fmt.Println("\nFactorial Calculation:")
+	fmt.Println("Factorial of 5:", Factorial(5))
+	fmt.Println("Factorial of 7:", Factorial(7))
+
+	wordCounter("My name is Sai Abhishiktha")
+
 	// --- Maps ---
 	subjects := map[string]int{
 		"Maths":   75,
 		"Science": 60,
 		"English": 50,
 	}
+
+	fmt.Println("\nTotal Subjects:", len(subjects))
 
 	fmt.Println("Subjects:", subjects)
 
